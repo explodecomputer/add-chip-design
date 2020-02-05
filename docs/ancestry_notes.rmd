@@ -3,19 +3,24 @@ title: Strategies for chip design to aid with accurate imputation across multipl
 author: Gibran Hemani and Dan Lawson
 ---
 
-The challenge - describe chip and target population. Current issues etc
+One of the goals of the ADD cohort is to include a larger proportion of non-European ancestry individuals than previous studies have managed. We need to ensure that the array design is able to obtain reasonable imputation accuracy of non-Europeans, if not parity with Europeans. This must be done without abrogating the imputation quality of the European samples, who will constitute the majority of the data.
 
-Two options:
+There are two broad approaches:
 
-1. Variant selection for post-imputation checking of reliable performance
+1. Variant selection for post-imputation checking of reliable performance. This is what was originally discussed on the call
+2. Variant selection optimised for imputation accuracy
 
-For example, if we genotype variants that we want to perform well as an indicator of the parity of accuracy across different ethnic groups. 
+## Variant selection for post-imputation checking of reliable performance
 
-Suggestion 1: Include a set of ancestry informative markers on the SNP chip and then exclude them when performing imputation, in order to evaluate how well they are imputed against the known genotype value. These tend to be variants that have high Fst in global population samples. We could ask whether variants that differentiate a pair of populations have been as well imputed as variants that differentiate other pairs of populations. 
+**Suggestion 1:** 
 
-Potential problems: are variants with high Fst special and therefore not representative of the rest of the variants? e.g. are they related to a sweep or hotspot
+Include a set of ancestry informative markers on the SNP chip and then exclude them when performing imputation, in order to evaluate how well they are imputed against the known genotype value. These tend to be variants that have high Fst in global population samples. We could ask whether variants that differentiate a pair of populations have been as well imputed as variants that differentiate other pairs of populations. 
 
-Suggestion 2: Maf - Info relationship for each sub population. No need for specific variants to be included
+**Potential problems:** are variants with high Fst special and therefore not representative of the rest of the variants? e.g. are they related to a sweep or hotspot
+
+**Suggestion 2:** 
+
+Maf - Info relationship for each sub population. No need for specific variants to be included
 
 Suggestion 3: Run simulations where sequence data is thinned to genotype data, and see which has a) highest precision and b) highest accuracy. Some kind of ROC curve.
 
@@ -61,4 +66,4 @@ One way to create a SNP set:
 
 HGDP - https://www.biorxiv.org/content/10.1101/674986v1.full.pdf
 SGDP - https://reichdata.hms.harvard.edu/pub/datasets/sgdp/
-
+HRC - http://www.haplotype-reference-consortium.org/participating-cohorts
