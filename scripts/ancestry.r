@@ -9,9 +9,12 @@ a <- subset(a, V66 == 1)
 
 index <- a$V26 > (a$V27 * 0.5 + 45)
 table(index)
-ggplot(a, aes(V27, V26)) +
+
+p1 <- ggplot(a, aes(V27, V26)) +
 geom_point(aes(colour=index)) +
 geom_abline(intercept=45, slope=0.5)
+ggsave("../images/eur-vs-non_eur.png")
+
 
 # Assume that the order of b is the same as a after exclusions removed
 

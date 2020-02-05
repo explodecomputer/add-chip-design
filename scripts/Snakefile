@@ -1,0 +1,42 @@
+import os
+import json
+
+os.makedirs("../results", exist_ok=True)
+os.makedirs("../results/info", exist_ok=True)
+os.makedirs("../images", exist_ok=True)
+os.makedirs("job_reports", exist_ok=True)
+
+
+# Define chromosomes to analyse
+CHR = list(range(1,23))
+POPS = ['europeans', 'non_europeans']
+
+with open("config.json", "r") as j:
+	config = json.load(j)
+datadir = config['datadir']
+
+
+rule all:
+	input: expand("../results/info/chr{chr}.{pop}.txt", chr=CHR, pop=POPS)
+
+
+rule define_pops:
+	input:
+		'../data/ukb878_imp_chr10_v2_s487406.sample',
+		'../data/ukb_sqc_v2.txt'
+	output:
+		expand('../data/{pop}.txt', pop=POPS),
+		'../images/eur-vs-non_eur.png'
+	shell:
+		'Rscript ancestry.r'
+
+
+rule get_info:
+	input:
+		'../data/{pop}.txt'
+	output:
+		'../results/info/chr{chr}.{pop}.txt'
+	shell:
+		'module add apps/qctool/2.0rc4; qctool -g {datadir}/raw_downloaded/bgen/ukb_imp_chr{wildcards.chr}_v3.bgen -s ../data/ukb878_imp_chr10_v2_s487406.sample -incl-samples ../data/{wildcards.pop}.txt -snp-stats -osnp ../results/info/chr{wildcards.chr}.{wildcards.pop}.txt'
+
+

@@ -1,0 +1,20 @@
+{
+	"__default__" :
+	{
+		"name": "{rule}",
+		"partition": "mrcieu",
+		"nodes": "1",
+		"ncpu": "1",
+		"ntask": "1",
+		"time": "10:00:00",
+		"mem": "15G",
+		"output": "job_reports/{rule}.out"
+	},
+
+	"get_info" :
+	{
+		"name": "{rule}.{wildcards.chr}.{wildcards.pop}",
+		"output": "job_reports/{rule}.{wildcards.chr}.{wildcards.pop}.out"
+	}
+}
+
